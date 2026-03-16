@@ -5,7 +5,7 @@ Automatically update the booking window ("days out") for two GHL calendars on a 
 
 ## Calendars
 1. **Roadmap Call with Renzo**
-2. **Coaches and Creators Roadmap Call**
+2. **Coaches & Creators Roadmap Call**
 
 ## Schedule (Central Time)
 | Day       | Time  | Days Out |

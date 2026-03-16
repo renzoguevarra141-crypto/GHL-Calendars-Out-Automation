@@ -7,7 +7,7 @@ from ghl_update_days_out import resolve_calendar_ids, update_days_out
 
 CALENDAR_NAMES = [
     "Roadmap Call with Renzo",
-    "Coaches and Creators Roadmap Call",
+    "Coaches & Creators Roadmap Call",
 ]
 
 
