@@ -79,10 +79,11 @@ def update_days_out(calendars, days_out, dry_run=False):
             print(f"[DRY RUN] [{timestamp}] Would update '{cal_name}': {old_value} {old_unit} -> {days_out} days")
             continue
 
-        payload = {
-            "allowBookingFor": days_out,
-            "allowBookingForUnit": "days",
-        }
+        # Copy calendar settings but remove read-only fields the API rejects
+        readonly_fields = {"id", "locationId", "formSubmitRedirectUrl", "openHours"}
+        payload = {k: v for k, v in cal.items() if k not in readonly_fields}
+        payload["allowBookingFor"] = days_out
+        payload["allowBookingForUnit"] = "days"
 
         resp = requests.put(
             f"{API_BASE}/calendars/{cal_id}",
