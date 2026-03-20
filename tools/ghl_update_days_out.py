@@ -79,9 +79,10 @@ def update_days_out(calendars, days_out, dry_run=False):
             print(f"[DRY RUN] [{timestamp}] Would update '{cal_name}': {old_value} {old_unit} -> {days_out} days")
             continue
 
-        payload = cal.copy()
-        payload["allowBookingFor"] = days_out
-        payload["allowBookingForUnit"] = "days"
+        payload = {
+            "allowBookingFor": days_out,
+            "allowBookingForUnit": "days",
+        }
 
         resp = requests.put(
             f"{API_BASE}/calendars/{cal_id}",

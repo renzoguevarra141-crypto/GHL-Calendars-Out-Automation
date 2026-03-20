@@ -48,9 +48,9 @@ For local use: set in `.env`. For CI: set as GitHub repository secrets.
 
 ## Troubleshooting
 - **401 Unauthorized** — API key expired or invalid. Regenerate in GHL settings.
-- **422 Unprocessable** — Calendar type may not support this field. Check `calendarType` via list script.
+- **422 Unprocessable** — The PUT endpoint rejects read-only fields like `id`, `locationId`, `formSubmitRedirectUrl`, and `openHours`. Only send the fields you want to update.
 - **Calendar not found** — Name changed in GHL. Update `CALENDAR_NAMES` in `ghl_run_scheduled_update.py`.
-- **Workflow didn't run** — GitHub Actions cron can be delayed up to 15 min. Check Actions tab.
+- **Workflow didn't run** — GitHub Actions disables cron on inactive repos. A `keep_alive.yml` workflow runs weekly to prevent this. Also, cron can be delayed up to 15 min.
 - **Wrong day detected** — DST shift. In winter (CST), runs fire 1 hour later in CT. Acceptable for 7pm trigger.
 
 ## Changing the Schedule
