@@ -8,11 +8,12 @@ Automatically update the booking window ("days out") for two GHL calendars on a 
 2. **Coaches & Creators Roadmap Call**
 
 ## Schedule (Central Time)
-| Day       | Time  | Days Out |
-|-----------|-------|----------|
-| Thursday  | 7pm   | 4        |
-| Saturday  | 7pm   | 3        |
-| Sunday    | 7pm   | 2        |
+| Day       | Time     | Days Out |
+|-----------|----------|----------|
+| Thursday  | 11:55pm  | 4        |
+| Friday    | 11:55pm  | 3        |
+| Saturday  | 11:55pm  | 3        |
+| Sunday    | 11:55pm  | 2        |
 
 "Days out" = how far into the future someone can book (e.g., 2 = today and tomorrow only).
 
@@ -51,7 +52,7 @@ For local use: set in `.env`. For CI: set as GitHub repository secrets.
 - **422 Unprocessable** — The PUT endpoint rejects read-only fields like `id`, `locationId`, `formSubmitRedirectUrl`, and `openHours`. Only send the fields you want to update.
 - **Calendar not found** — Name changed in GHL. Update `CALENDAR_NAMES` in `ghl_run_scheduled_update.py`.
 - **Workflow didn't run** — GitHub Actions disables cron on inactive repos. A `keep_alive.yml` workflow runs weekly to prevent this. Also, cron can be delayed up to 15 min.
-- **Wrong day detected** — DST shift. In winter (CST), runs fire 1 hour later in CT. Acceptable for 7pm trigger.
+- **Wrong day detected** — DST shift. In winter (CST=UTC-6), crons fire at 5:55 AM UTC instead of 4:55 AM UTC, but still land at 11:55pm CT.
 
 ## Changing the Schedule
 - To change times/days: edit `.github/workflows/update_days_out.yml` cron entries (UTC) and the day-of-week mapping in the "Determine days-out value" step.
