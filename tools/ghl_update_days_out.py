@@ -7,12 +7,6 @@ from datetime import datetime, timezone
 
 import requests
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
-
 API_BASE = "https://services.leadconnectorhq.com"
 HEADERS_TEMPLATE = {
     "Version": "2021-04-15",

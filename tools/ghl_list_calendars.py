@@ -6,12 +6,6 @@ import sys
 
 import requests
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass  # python-dotenv not required (env vars set externally in CI)
-
 API_BASE = "https://services.leadconnectorhq.com"
 HEADERS_TEMPLATE = {
     "Version": "2021-04-15",
@@ -20,9 +14,9 @@ HEADERS_TEMPLATE = {
 
 
 def get_headers():
-    api_key = os.environ.get("GHL_API_KEY")
+    api_key = os.environ.get("GHL_SUB_ACCOUNT_API_KEY") or os.environ.get("GHL_API_KEY")
     if not api_key:
-        print("Error: GHL_API_KEY environment variable is not set.", file=sys.stderr)
+        print("Error: GHL_SUB_ACCOUNT_API_KEY or GHL_API_KEY environment variable is not set.", file=sys.stderr)
         sys.exit(1)
     return {**HEADERS_TEMPLATE, "Authorization": f"Bearer {api_key}"}
 
